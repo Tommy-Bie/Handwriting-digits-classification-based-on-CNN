@@ -4,7 +4,8 @@ from torch import nn
 from torch import optim  # 优化函数
 from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder  # 图像读取
-from model import my_net
+from model import my_alexnet
+from model import my_vgg16
 import random
 import matplotlib.pyplot as plt
 
@@ -45,7 +46,10 @@ if __name__ == '__main__':
 
      train_DataLoader = DataLoader(train_data, batch_size=1, shuffle=True)
      test_DataLoader = DataLoader(test_data, batch_size=1, shuffle=False)
-     net = my_net()
+
+     net = my_alexnet()  # 此处使用基于AlexNet设计的CNN，若想使用VGG，请使用下一行的注释代码
+     # net = my_vgg16()
+
      net.to(DEVICE)
      criterion = nn.CrossEntropyLoss()
      optimizer = optim.SGD(net.parameters(), lr=Learning_rate, momentum=0.9)
